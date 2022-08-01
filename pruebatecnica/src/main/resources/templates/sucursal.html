@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form th:action="@{/sucursal/alta}" th:object="${sucursal}"method="post">
+	<label>nombre sucursal: </label>
+	<input type="text" th:field = "*{nombre}"/>
+	<input type="submit" value="Agregar Sucursal">
+</form>
+</body>
+</html>
