@@ -1,5 +1,7 @@
 package com.truper.pruebatecnica.pruebatecnica.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,19 @@ public class SucursalServiceImpl implements ISucursalService{
 	@Autowired
 	private ISucursalDao sucursalDao;
 	@Override
-	public void save(Sucursal sucursal) {
+	public Sucursal save(Sucursal sucursal) {
 		
-		sucursalDao.save(sucursal);
+		return sucursalDao.save(sucursal);
 		
+	}
+	@Override
+	public List<Sucursal> listar() {
+		return (List<Sucursal>) sucursalDao.findAll();
+	}
+	@Override
+	public Sucursal findById(Integer id) {
+		// TODO Auto-generated method stub
+		return sucursalDao.findById(id).orElse(null);
 	}
 
 }

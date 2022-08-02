@@ -1,28 +1,41 @@
 package com.truper.pruebatecnica.pruebatecnica.entity;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "productos")
-public class Producto {
+public class Producto implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotEmpty
+	@Column(name = "producto_id")
 	private Integer id;
 	@NotEmpty
 	private String codigo;
 	@NotEmpty
 	private String descripcion;
 	@NotEmpty
-	private BigDecimal precio;
+	private String precio;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "orden_id")
+	private Orden orden;
+
+	public Producto() {
+		super();
+	}
 
 	public Integer getId() {
 		return id;
@@ -48,12 +61,24 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public BigDecimal getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(BigDecimal precio) {
+	public void setPrecio(String precio) {
 		this.precio = precio;
+	}
+
+	public Orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(Orden orden) {
+		this.orden = orden;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
